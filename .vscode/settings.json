@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "U1A2 Maze Navigator/lib/Becker/becker.jar",
+        "StatsBot/lib/Becker/becker.jar"
+    ]
+}
