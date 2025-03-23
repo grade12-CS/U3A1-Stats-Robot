@@ -7,5 +7,6 @@ public class RobotTask {
 		maze.showThingCounts(true); 
 		StatsBot sb = new StatsBot(maze, 4, 4);
 		sb.moveWest(2);
+		sb.displayProbabilities();
 	}
 }

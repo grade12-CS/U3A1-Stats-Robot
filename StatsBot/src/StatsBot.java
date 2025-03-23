@@ -9,7 +9,18 @@ public class StatsBot extends RobotSE {
         super(city, y, x, Direction.NORTH, 999);
     }
 
-    protected int moveCount = 0;
+    protected int totalMoves = 0;
+    protected int east = 0;
+    protected int west = 0;
+    protected int north = 0;
+    protected int south = 0;
+
+    public void displayProbabilities() {
+        System.out.println("Probability to move in East: " + Math.round(east / totalMoves * 100) + '%');
+        System.out.println("Probability to move in West: " + Math.round(west / totalMoves * 100) + '%');
+        System.out.println("Probability to move in North: " + Math.round(north / totalMoves * 100) + '%');
+        System.out.println("Probability to move in South: " + Math.round( south / totalMoves * 100) + '%');
+    }
 
     public void moveEast(int n) {
         var dir = getDirection();
@@ -22,7 +33,8 @@ public class StatsBot extends RobotSE {
             turnLeft();
         }
         move(n);
-        moveCount += n;
+        totalMoves += n;
+        east += n;
     } 
 
     public void moveWest(int n) {
@@ -36,7 +48,8 @@ public class StatsBot extends RobotSE {
             turnRight();
         }
         move(n);
-        moveCount += n;
+        totalMoves += n;
+        west += n;
     } 
 
     public void moveSouth(int n) {
@@ -50,7 +63,8 @@ public class StatsBot extends RobotSE {
             turnRight();
         }
         move(n);
-        moveCount += n;
+        totalMoves += n;
+        south += n;
     } 
     
     public void moveNorth(int n) {
@@ -64,6 +78,7 @@ public class StatsBot extends RobotSE {
             turnLeft();
         }
         move(n);
-        moveCount += n;
+        totalMoves += n;
+        north += n;
     } 
 }
