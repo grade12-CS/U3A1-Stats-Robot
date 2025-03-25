@@ -5,11 +5,12 @@ public class StatsBot extends RobotAdvanced {
         super(city, y, x);
     }
 
-    protected int totalMoves = 0;
-    protected int east = 0;
-    protected int west = 0;
-    protected int north = 0;
-    protected int south = 0;
+    private int totalMoves = 0;
+    private int east = 0;
+    private int west = 0;
+    private int north = 0;
+    private int south = 0;
+    private int thingsPicked = 0;
 
     /**
      * displays probabilities of directions robot may move, after performing some movements
@@ -19,6 +20,13 @@ public class StatsBot extends RobotAdvanced {
         System.out.println("Probability to move in West: " + String.format("%.2f", (double) west / totalMoves * 100) + '%');
         System.out.println("Probability to move in North: " + String.format("%.2f", (double) north / totalMoves * 100) + '%');
         System.out.println("Probability to move in South: " + String.format("%.2f", (double) south / totalMoves * 100) + '%');
+        System.out.println("Probability to pick Things: " + String.format("%.2f", (double) thingsPicked / totalMoves * 100) + '%');
+    }
+
+    @Override
+    public void pickThing() {
+        super.pickThing();
+        thingsPicked ++;
     }
 
     @Override
