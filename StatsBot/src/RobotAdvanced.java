@@ -17,6 +17,10 @@ public class RobotAdvanced extends RobotSE{
         return getStreet();
     }
 
+    public Point getCurrentPoint() {
+        return new Point(getX(), getY());
+    }
+
     public void turnTo(Direction target) {
         var current = getDirection(); 
         if (current == target) return;
@@ -35,15 +39,19 @@ public class RobotAdvanced extends RobotSE{
         }
     }
 
+    public void move(Direction direction, int spaces) {
+        if (spaces <= 0) return;
+        turnTo(direction);
+        repeat(() -> move(), spaces);
+    }
+
     public void move(int x, int y) {
-       turnTo(x > 0 ? Direction.EAST : Direction.WEST); 
-       move(Math.abs(x));
-       turnTo(y > 0 ? Direction.NORTH : Direction.SOUTH);
-       move(Math.abs(y));
+       move(x > 0 ? Direction.EAST : Direction.WEST, Math.abs(x));
+       move(y > 0 ? Direction.SOUTH : Direction.NORTH, Math.abs(y));
     }
     
     public void goTo(int x, int y) {
-        move(x- getX(), y - getY());
+        move(x - getX(), y - getY());
     }
 
     @Override

@@ -10,6 +10,7 @@ public class Graph {
         public Node(int x, int y) {
             this.x = x;
             this.y = y;
+            nodes.add(Node.this);
         } 
 
         public void connect(Node other) {
@@ -21,7 +22,11 @@ public class Graph {
     private final HashSet<Node> nodes = new HashSet<>();
 
     public Node addNode(int x, int y) {
-        return new Node(x, y);
+       return new Node(x, y);
+    }
+
+    public Node addNode(Point point) {
+        return addNode(point.x, point.y);
     }
 
     public Optional<Node> find(int x, int y) {
@@ -31,5 +36,9 @@ public class Graph {
             }
         }
         return Optional.empty();
+    }
+
+    public Optional<Node> find(Point point) {
+        return find(point.x, point.y);
     }
 }
