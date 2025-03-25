@@ -8,5 +8,6 @@ public class RobotTask {
 		maze.showThingCounts(true); 
 		MazeBot bot = new MazeBot(maze, 4, 4);
 		bot.solve(avenues, streets);
+		bot.displayProbabilities();
 	}
 }

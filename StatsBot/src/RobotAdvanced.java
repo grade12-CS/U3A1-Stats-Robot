@@ -6,7 +6,7 @@ public class RobotAdvanced extends RobotSE{
     }
 
     public RobotAdvanced(City city, int x, int y) {
-        super(city, y, x, Direction.NORTH, 999);
+        super(city, y, x, Direction.NORTH, 0);
     } 
 
     public int getX() {

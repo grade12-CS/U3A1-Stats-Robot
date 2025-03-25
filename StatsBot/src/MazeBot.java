@@ -4,20 +4,15 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MazeBot extends RobotAdvanced{
+public class MazeBot extends StatsBot{
     private final City field;
 
-    public MazeBot(Cijy city, int x, int y, Direction direction, int things) {
-        super(city, y, x, direction, things);
-        this.field = city;
-    }
-
     public MazeBot(City city, int x, int y) {
-        super(city, y, x, Direction.NORTH, 0);
+        super(city, y, x);
         this.field = city;
     } 
 
-    private List<Point> thingPoints = new ArrayList<>(); 
+    private final List<Point> thingPoints = new ArrayList<>(); 
 
     public Graph scan(final int startX, final int startY, final int avenues, final int streets) {
         Direction[] northAndWest = { Direction.NORTH, Direction.WEST };
@@ -53,7 +48,8 @@ public class MazeBot extends RobotAdvanced{
         LinkedList<Graph.Node> toVisit = new LinkedList<>();
         HashSet<Graph.Node> visited = new HashSet<>();
         toVisit.add(end);
-        int dist = 0;
+        int dist = 0; //spaces to walk
+        //checks for avaialbe paths
         while (!toVisit.isEmpty()) {
             Graph.Node visiting = toVisit.remove();
             visiting.value = ++dist;
@@ -65,6 +61,7 @@ public class MazeBot extends RobotAdvanced{
             visited.add(visiting);
         }
 
+        //take the shortest path to the end point 
         Graph.Node move = start; 
         while (move != end) {
             int shortest = dist;
@@ -91,16 +88,14 @@ public class MazeBot extends RobotAdvanced{
     }
 
     public void solve(Point end, Graph graph) {
-        Point current = getCurrentPoint();
-        solve(current, end, graph);
+        solve(getCurrentPoint(), end, graph);
     }
 
     public void solve(int avenues, int streets) {
         final Point home = getCurrentPoint();
         Graph graph = scan(0, 0, avenues, streets);
-        
         while (!thingPoints.isEmpty()) {
-            Point thingPoint = thingPoints.removeLast();
+            Point thingPoint = thingPoints.removeFirst();
             solve(thingPoint, graph);
             pickAllThings(); 
         }
