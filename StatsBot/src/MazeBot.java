@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MazeBot extends StatsBot{
+    /**
+     * the city in which the robot is created
+     */
     private final City field;
 
     public MazeBot(City city, int x, int y) {
@@ -14,6 +17,14 @@ public class MazeBot extends StatsBot{
 
     private final List<Point> thingPoints = new ArrayList<>(); 
 
+    /**
+     * scan current map and generate a graph
+     * @param startX x-coordinate of robot's starting point
+     * @param startY y-coordinate of robot's starting point
+     * @param avenues the number of columns of the map
+     * @param streets the number of rows of the map
+     * @return graph generated from the map
+     */
     public Graph scan(final int startX, final int startY, final int avenues, final int streets) {
         Direction[] northAndWest = { Direction.NORTH, Direction.WEST };
         Graph graph = new Graph();
@@ -44,6 +55,12 @@ public class MazeBot extends StatsBot{
         return graph;
     } 
 
+    /**
+     * solve the given graph, using depth-first search algorithm
+     * @param start the node to start moving in the graph
+     * @param end the node to end moving in the graph
+     * @param graph graph to solve
+     */
     public void solve(Graph.Node start, Graph.Node end, Graph graph) {
         LinkedList<Graph.Node> toVisit = new LinkedList<>();
         HashSet<Graph.Node> visited = new HashSet<>();
@@ -75,6 +92,12 @@ public class MazeBot extends StatsBot{
         }
     }
 
+    /**
+     * solve the given graph
+     * @param start starting point, given that the point is in the graph 
+     * @param end ending point, given that the point is in the graph
+     * @param graph graph to solve
+     */
     public void solve(Point start, Point end, Graph graph) {
         var startNode = graph.find(start);
         var endNode = graph.find(end);
@@ -87,10 +110,20 @@ public class MazeBot extends StatsBot{
         }
     }
 
+    /**
+     * solve the given graph
+     * @param end ending point, given that the point is in the graph
+     * @param graph graph to solve
+     */
     public void solve(Point end, Graph graph) {
         solve(getCurrentPoint(), end, graph);
     }
 
+    /**
+     * solve the given graph
+     * @param avenues the number of columns of the map
+     * @param streets the number of rows of the map
+     */
     public void solve(int avenues, int streets) {
         final Point home = getCurrentPoint();
         Graph graph = scan(0, 0, avenues, streets);

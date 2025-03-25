@@ -5,12 +5,15 @@ public class StatsBot extends RobotAdvanced {
         super(city, y, x);
     }
 
-    private int totalMoves = 0;
-    private int east = 0;
-    private int west = 0;
-    private int north = 0;
-    private int south = 0;
+    protected int totalMoves = 0;
+    protected int east = 0;
+    protected int west = 0;
+    protected int north = 0;
+    protected int south = 0;
 
+    /**
+     * displays probabilities of directions robot may move, after performing some movements
+     */
     public void displayProbabilities() {
         System.out.println("Probability to move in East: " + String.format("%.2f", (double) east / totalMoves * 100) + '%');
         System.out.println("Probability to move in West: " + String.format("%.2f", (double) west / totalMoves * 100) + '%');
@@ -37,6 +40,11 @@ public class StatsBot extends RobotAdvanced {
         this.move(x - getX(), y - getY());
     }
 
+    /**
+     * moves to east, regardless of the diretion robot is currently heading to.
+     * tracks total moves and east movements
+     * @param n the number of spaces robot will move to east
+     */
     public void moveEast(int n) {
         if (n <= 0) return;
         move(Direction.EAST, n);
@@ -44,6 +52,11 @@ public class StatsBot extends RobotAdvanced {
         east += n;
     } 
 
+    /**
+     * moves to west, regardless of the diretion robot is currently heading to.
+     * tracks total moves and west movements
+     * @param n the number of spaces robot will move to west 
+     */
     public void moveWest(int n) {
         if (n <= 0) return;
         move(Direction.WEST, n);
@@ -51,6 +64,11 @@ public class StatsBot extends RobotAdvanced {
         west += n;
     } 
 
+    /**
+     * moves to south, regardless of the diretion robot is currently heading to.
+     * tracks total moves and south movements
+     * @param n the number of spaces robot will move to south 
+     */
     public void moveSouth(int n) {
         if (n <= 0) return;
         move(Direction.SOUTH, n);
@@ -58,6 +76,11 @@ public class StatsBot extends RobotAdvanced {
         south += n;
     } 
     
+    /**
+     * moves to north, regardless of the diretion robot is currently heading to.
+     * tracks total moves and north movements
+     * @param n the number of spaces robot will move to north 
+     */
     public void moveNorth(int n) {
         if (n <= 0) return;
         move(Direction.NORTH, n);
@@ -65,6 +88,9 @@ public class StatsBot extends RobotAdvanced {
         north += n;
     } 
 
+    /**
+     * resets all stats
+     */
     public void reset() {
         totalMoves = 0;
         east = 0;
